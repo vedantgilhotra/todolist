@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Profile Page
+    </title>
+</head>
+
+<body>
+    <h1>Welcome to profile page: <%= user.name %> </h1>
+
+    <table style="width: 50%; margin-left: auto;margin-right: auto;">
+        <tr>
+            <td>
+                <table style="padding: 10px; border-spacing: 10px; border: 1px solid black;">
+                    <form method="POST" action="/add">
+                        <tr>
+
+                            <td>
+                                <label for="todoinput">
+                                    New to-do:
+                                </label>
+                            </td>
+
+                            <td>
+                                <input type="text" autofocus placeholder="Enter your new to-do" id="todoinput"
+                                    name="item">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                    Add new to-do
+                                </button>
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            </td>
+            <td>
+                <form method="get" action="/logout">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">
+                        Logout
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+        <% if (array != null) { %>
+        <% if(array.length>0) { %>
+        <% for(var i=0; i < n_rows;i++) { %>
+        <tr>
+            <% for(var j = (3*i); j < (3*i)+3; j++ ) { %>
+            <td>
+                <% if(array[j]) { %>
+                <% if(array[j].dataValues.done == "no") { %>
+                <table style="background-color: green; padding: 10px; border-spacing: 5px; border: 1px solid black;">
+                    <% } %>
+                    <% if(array[j].dataValues.done == "yes") { %>
+                    <table style="background-color: grey; padding: 10px; border-spacing: 5px; border: 1px solid black;">
+                        <% } %>
+                        <form method="POST" action="/todo_edit">
+                            <tr>
+                                <td colspan="1">
+                                    To-do:
+                                </td>
+                                <td colspan="2" rowspan="1" style="text-align: left;">
+                                    <%= array[j].dataValues.item %>
+                                </td>
+                                <td style="width: 25%;">
+                                    To-do id:
+                                </td>
+                                <td style="text-align: left;">
+                                    <%= array[j].dataValues.id %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">
+                                    <%if(array[j].dataValues.edit == true) { %>
+                                    <label for="editinput">Edit task to:</label>
+                                    <% } %>
+                                </td>
+                                <td colspan="1">
+                                    <%if(array[j].dataValues.edit == true) { %>
+                                    <input type="text" placeholder="Enter task details here" id="editinput" name="edit">
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <%if(array[j].dataValues.edit == true) { %>
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block" name="id"
+                                        value="<%= array[j].dataValues.id %>">
+                                        Submit
+                                    </button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </form>
+                        <tr>
+                            <td>
+
+                                <form method="post" action="/create_edit">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block" name="id"
+                                        value="<%= array[j].dataValues.id %>">
+                                        edit
+                                    </button>
+                                </form>
+
+                            </td>
+
+                            <td>
+                                <form method="POST" action="/todo_delete">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block" name="id"
+                                        value="<%= array[j].dataValues.id %>">
+                                        delete
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST" action="/todo_done">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block" name="id"
+                                        value="<%=array[j].dataValues.id%>">
+                                        <% if(array[j].dataValues.done == "no") { %>
+                                        done
+                                        <% } %>
+                                        <% if(array[j].dataValues.done == "yes") { %>
+                                        Mark not Done
+                                        <% } %>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <% } %>
+
+            </td>
+            <% } %>
+        </tr>
+        <% } %>
+        <% } %>
+        <% } %>
+
+        <% if(message != null) { %>
+        <tr>
+            <td>
+                <%= message %>
+            </td>
+        </tr>
+        <% } %>
+
+    </table>
+
+</body>
+
+</html>

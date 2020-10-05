@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Welcome to the sign-in page
+        </title>
+        <body style ="background-color: cyan;">
+            <h1 style= "text-align: center;">Sign in here</h1>
+            <table style="margin-left: auto;margin-right: auto; border: 1px solid black; padding:15px; border-spacing:20px;">
+                <form method = "post" action="/signin">
+                <tr>
+                    <td>
+                        <label for = "emailinput">Email</label>
+                    </td>
+                    <td>
+                        <input 
+                        type="email"
+                        id = "emailinput"
+                        name = "email"
+                        placeholder="Enter Email"
+                        required
+                        autofocus
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password</label>
+                    </td>
+                    <td>
+                        <input 
+                        type="password"
+                        id = "password"
+                        name = "password"
+                        placeholder="Enter Password"
+                        required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Signin
+                    </button>
+                    </td>
+                    </form>
+                    <td>
+                    <form method="get" action="signup">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            Signup
+                        </button>
+                    </form>
+                    </td>
+                </tr>
+               
+                
+            </table>
+            <% if(message != null) {%>
+                <p style = "text-align: center;"><%= message %></p>
+                <% } %>
+        </body>
+    </head>
+</html>
